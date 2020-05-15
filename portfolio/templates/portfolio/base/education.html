@@ -1,0 +1,19 @@
+
+	<div class="row">
+      <div class="col-md-8 section__resume resume-list">
+        <h3 class="resume-list_title">{{portfolio.education_title}}</h3>
+        {% for education in portfolio.education %}
+	        <div class="resume-list__block">
+	          <p class="resume-list__block-title">{{education.value.university}}</p>
+	          <p class="resume-list__block-date">{{education.value.year_passing}}</p>
+	          <p>
+	            {{education.value.education_content}}
+	          </p>
+	        </div>
+	      {% endfor %}
+      </div>
+    </div>
+    
+    
+    
+    

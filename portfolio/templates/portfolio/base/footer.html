@@ -1,0 +1,30 @@
+    <!--Contact-->
+    <div class="background" style="background-image: url(assets/img/img_bg_main.jpg)">
+        <div id="contact" class="container section" style="padding-bottom: 10px;">
+            <div class="row contacts">
+                <div class="col-md-5 col-lg-4">
+                    {% block footer_section1 %}
+                    {% endblock %} 
+                </div>
+                <div class="col-md-7 col-lg-5">
+                    
+                    {% block footer_section2 %}
+                    {% endblock %}
+                    
+                    {% block footer_title %}
+                    <div class="footer" style="top: 0px">
+                        <p> {%now "Y"%} {{copy_right}}</p>
+                    </div>
+                    <div class="contacts__social" style="text-align: center;">
+                            <span><a href="{{facebook_url}}">Facebook</a></span>
+                            <span><a href="{{linkedin_url}}">Linkedin</a></span>
+                            <span><a href="{{git_url}}">GitHub</a></span>
+                            <span><a href="{{bitbucket_url}}">Bitbucket</a></span>
+                    </div>
+                    {% endblock %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Contact-->

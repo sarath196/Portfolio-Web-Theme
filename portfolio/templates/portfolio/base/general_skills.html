@@ -1,0 +1,19 @@
+<div class="row section__resume progress-list js-progress-list">
+      <div class="col-md-12">
+        <h3 class="progress-list__title">{{portfolio.skills_title}}</h3>
+      </div>
+     {% for skill in portfolio.skills %}
+      <div class="col-md-5 mr-auto">
+        <div class="progress-list__skill">
+          <p>
+            <span class="progress-list__skill-title">{{skill.value.skills}}</span>
+            <span class="progress-list__skill-value">{{skill.value.percentage}}%</span>
+          </p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{skill.value.percentage}}" aria-valuemin="0" aria-valuemax="100" >
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>

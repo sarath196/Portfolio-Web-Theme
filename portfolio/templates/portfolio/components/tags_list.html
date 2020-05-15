@@ -1,0 +1,25 @@
+{% load i18n wagtailroutablepage_tags %}
+
+  <div class="row posts">
+            <div class="container">
+			  <h5>Tags Filter</h5>
+			  <div class="card">
+			  <div class="card-body">
+			  
+					{% for tag in tags %}
+			            <a href="{% routablepageurl blog_page "post_by_tag" tag.slug %}">
+			                <span class="badge badge-secondary">{{ tag }}</span>
+			            </a>
+			        {% empty %}
+			            {% trans 'No tags yet' %}
+			        {% endfor %}
+
+			  </div>
+			</div>
+			</div>
+            
+        </div>
+
+
+
+

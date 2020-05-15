@@ -1,0 +1,43 @@
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd%}
+<!--Blog-->
+  <section id="blog" class="container section">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 id="blog_header" class="section__title">Latest Article's_</h2>
+      </div>
+    </div>
+    
+    <div class="row post-cards">
+    {% for post in posts %}
+      <div class="col-md-4">
+        <a href="{% post_date_url post blog_page %}">  
+          <div class="post-cards__card">
+            <div class="post-cards__img">
+              {% if post.header_image %}
+	      		{% image post.header_image original as header_image %}
+			           <img src="{{ header_image.url }}"  ></img>
+			         
+	  			{% endif %}
+            </div>
+            <div class="post-cards__info">
+              <p class="post-cards__date">{{ post.date|date:"M d, Y" }}</p>
+              <h3 class="post-cards_title">{{ post.title }}</h3>
+              <p class="post-cards_description">
+              {% if post.excerpt %}
+			                {{ post.excerpt|safe|truncatewords_html:20 }} 
+			  {% else %}
+			                {{ post.body|safe|truncatewords_html:20 }}
+			  {% endif %}
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+	{% endfor %}
+
+    </div>
+    <div style="text-align: center; width: 100%;" >
+    <a href="{{blog_page.url}}" class="section_btn site-btn" >More Article's</a>
+  	</div>
+  </section>
+<!--Blog-->

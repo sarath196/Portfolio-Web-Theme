@@ -1,0 +1,150 @@
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar  el_pagination_tags menu_tags wagtailmd %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}{{ blog_page.title }}{% if blog_page.description %} | {{ blog_page.description }}{% endif %}{% endblock title %}</title>
+    <meta name="description" content="{% block meta_description %}{{ blog_page.search_description }}{% endblock meta_description %}"/>
+
+    <link rel="canonical" href="{% block canonical %}{% endblock canonical %}"/>
+
+    
+    <link rel="stylesheet" href="{% static 'assets/css/color.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Inconsolata" rel="stylesheet">
+    <link href="{% static 'assets/2.0.46/css/materialdesignicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/searchbar.css' %}" rel="stylesheet">
+    <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter41478434 = new Ya.Metrika({ id:41478434, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "../../mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> 
+    <noscript><div><img src="https://mc.yandex.ru/watch/41478434" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+ 
+ <style type="text/css">
+ .left {
+ float : left;
+ margin-right: 10px;
+ }
+ .right {
+ float : right;
+ margin-left: 10px;
+ }
+
+.active-purple-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #ce93d8;
+    box-shadow: 0 0 0 1px #ce93d8;
+} 
+
+
+
+a:link {
+  color: #545454;
+  text-decoration: none;
+}
+a:visited {
+  color: #545454;
+  text-decoration: none;
+}
+a:hover {
+  color: #a382a5;
+  text-decoration: none;
+}
+
+
+ </style>
+ 
+ 
+  </head>
+
+  <body>
+
+    {% wagtailuserbar %}
+
+    <!-- Navigation -->
+    
+   
+
+	<!--Main menu-->
+	  <div class="menu">
+	    <div class="container">
+	      <div class="row">
+	        <div class="menu__wrapper d-none d-lg-block col-md-12">
+	          <nav class="">
+	          {% block mainmenu %}
+	            {% main_menu template="menu/main_menu.html" %}
+	          {% endblock %}
+	          </nav>
+	        </div>
+	        <div class="menu__wrapper col-md-12 d-lg-none">
+	          <button type="button" class="menu__mobile-button">
+	            <span><i class="fa fa-bars" aria-hidden="true"></i></span>
+	          </button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	<!--Main menu-->
+	
+	<!-- Mobile menu -->
+	  <div class="mobile-menu d-lg-none">
+	    <div class="container">
+	      <div class="mobile-menu__close">
+	        <span><i class="mdi mdi-close" aria-hidden="true"></i></span>
+	      </div>
+	      <nav class="mobile-menu__wrapper">
+	      	{% block mobilemenu %}
+	        {% main_menu template="menu/main_menu.html" %}
+	        {% endblock %}
+	      </nav>
+	    </div>
+	  </div>
+	<!-- Mobile menu -->
+    
+    <!-- Page Content -->
+            {% block maincontent %}
+
+            {% endblock %}
+    <!-- /.container -->
+
+    <!-- Footer -->
+    		 {% block footer %}
+    		 	    		 <!--  Footer Content -->
+							 {% include 'portfolio/base/footer.html' %}
+							 <!-- End Footer Content -->
+	         {% endblock %}
+	
+	<script src="{% static 'assets/js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/menu.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'assets/js/progress-list.js' %}"></script>
+    <script src="{% static 'assets/js/section.js' %}"></script>
+    <script src="{% static 'assets/js/portfolio-filter.js' %}"></script>
+    <script src="{% static 'assets/js/slider-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/mobile-menu.js' %}"></script>
+    <script src="{% static 'assets/js/contacts.js' %}"></script>
+    <script src="{% static 'assets/js/mbclicker.min.js' %}"></script>
+    <script src="{% static 'assets/js/site-btn.js' %}"></script>
+    <script src="{% static 'assets/js/style-switcher.js' %}"></script>
+    
+
+    <script type="text/javascript">
+    if (document.location.hostname.search("wagtail.michaelyin.info") !== -1) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-39890589-7');
+    }
+    
+    $('.search-button').click(function(){
+    	  $(this).parent().toggleClass('open');
+    	});
+    </script>
+
+  </body>
+
+</html>
+

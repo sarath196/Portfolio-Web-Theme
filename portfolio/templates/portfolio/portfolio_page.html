@@ -1,0 +1,69 @@
+{% extends "portfolio/base/base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd%}
+
+{% block title %}{{ self.title }} | {{ blog_page.title }}{% endblock title %}
+{% block meta_title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock meta_title %}
+{% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% else %}{{ self.body|striptags|truncatewords:20 }}{% endif %}{% endblock meta_description %}
+
+{% block maincontent %}
+	<!-- Header Content -->
+	{% include 'portfolio/base/header.html' %}
+	<!-- End Header Content -->
+	
+	<!-- Hello Content -->
+	{% include 'portfolio/base/hello.html' %}
+	<!-- End Hello Content -->
+	
+	<hr>
+		
+	<!--Resume-->
+  	<section id="resume" class="container section">
+	<!-- Resume Content -->
+	{% include 'portfolio/base/resume.html' %}
+	<!-- End Resume Content -->
+	
+	<!-- Education Content -->
+	{% include 'portfolio/base/education.html' %}
+	<!-- End Education Content -->
+	
+	<!--  Employment Content -->
+	{% include 'portfolio/base/employment.html' %}
+	<!-- End Employment Content -->
+	
+	<!--  Skills Content -->
+	{% include 'portfolio/base/general_skills.html' %}
+	<!-- End Skills Content -->
+	</section>
+	<!--Resume-->
+	
+	
+	<!--  Portfolio Content -->
+	{% include 'portfolio/base/project_portfolio.html' %}
+	<!-- End Portfolio Content -->
+	
+	<!--  Portfolio Modal Content -->
+	{% include 'portfolio/base/project_portfolio_modal.html' %}
+	<!-- End Portfolio Modal Content -->
+	
+	<!--  TESTIMONIALS Content -->
+	{% include 'portfolio/base/testimonials.html' %}
+	<!-- End TESTIMONIALS Content -->
+	
+	<!--  Blog Content -->
+	{% include 'portfolio/base/articles.html' %}
+	<!-- End Blog Content -->
+	
+	<!--  Git Content -->
+	{% include 'portfolio/base/git_projects.html' %}
+	<!-- End Git Content -->
+	
+	
+	
+	
+	
+	
+{% endblock %}
+            
+
+
+

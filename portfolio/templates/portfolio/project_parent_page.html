@@ -1,0 +1,84 @@
+{% extends "portfolio/base/base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags el_pagination_tags wagtailmd menu_tags %}
+
+{% block title %}{{ self.title }} | {{ parent_project.title }}{% endblock title %}
+{% block meta_title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock meta_title %}
+{% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% else %}{{ self.body|striptags|truncatewords:20 }}{% endif %}{% endblock meta_description %}
+
+	
+				{% block mainmenu %}
+	            	{% main_menu template="menu/article_menu.html" %}
+	            {% endblock %}
+
+				{% block mobilemenu %}
+	        		{% main_menu template="menu/article_menu.html" %}
+	        	{% endblock %}
+	        	
+{% block maincontent %}
+    
+
+
+    
+
+	    <!--Header-->
+    <header class="background blog-header" style="background-image: url(assets/img/img_bg_main.jpg)">
+    </header>
+    <!--Header-->
+	{% paginate 9 projects %}
+    <!--Article-->
+    <div class="container section">
+        <div class="article">
+            <div class="row">
+                <div class="col-md-12">
+                
+                <div class="row">
+		            <div class="col-md-12">
+		                <h2  id="other_posts" class="section__title">Projects's_ </h2>
+		            </div>
+		        </div>
+                
+            <div class="row projects">
+            
+            {% for project_set in projects %}
+            
+            {%for project in project_set.project%}
+            <div class="col-md-4 ">
+                <div class="projects__item">
+                 	{% if project.value.project_image %}
+            		{% image project.value.project_image original as project_image %}
+			            <a href="{{project_set.url}}">
+			              <img src="{{ project_image.url }}" class="card-img-top"  ></img>
+			            </a>
+        			{% endif %}
+                    <a href="{{project_set.url}}">
+                        <h5 class="projects__title" style="margin-top: 10px;">{{ project.value.name }}</h5>
+                        <p class="projects__description">
+                       
+			                {% if project.value.excerpt %}
+				                {{ project.value.excerpt|safe|truncatewords_html:40 }}
+				            {% else %}
+				                {{project.value.description |safe|truncatewords_html:40}}
+				            {% endif %}
+			            
+                        </p>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            
+        </div>
+			        
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Article-->
+
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+      {% show_pages %}
+    </ul>
+
+{% endblock %}

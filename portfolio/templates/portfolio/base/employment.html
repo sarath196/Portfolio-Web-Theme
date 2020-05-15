@@ -1,0 +1,15 @@
+<div class="row">
+      <div class="col-md-8 section__resume resume-list">
+        <h3 class="resume-list_title">{{portfolio.employment_title}}</h3>
+       {% for employment in portfolio.employment %}
+        <div class="resume-list__block">
+          <p class="resume-list__block-title">{{employment.value.company_name}}</p>
+          <p class="resume-list__block-date">{{employment.value.experience}}</p>
+
+          <p>
+            {{employment.value.designation}}
+          </p>
+        </div>
+       {% endfor %}
+      </div>
+    </div>

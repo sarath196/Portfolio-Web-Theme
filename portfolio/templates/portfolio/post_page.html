@@ -1,0 +1,159 @@
+{% extends "portfolio/base/base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd wagtailroutablepage_tags menu_tags %}
+
+{% block title %}{{ self.title }} | {{ blog_page.title }}{% endblock title %}
+{% block meta_title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock meta_title %}
+{% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% else %}{{ self.body|striptags|truncatewords:20 }}{% endif %}{% endblock meta_description %}
+
+{% block canonical %}{% canonical_url self%}{% endblock canonical %}
+
+				{% block mainmenu %}
+	            	{% main_menu template="menu/article_menu.html" %}
+	            {% endblock %}
+
+				{% block mobilemenu %}
+	        		{% main_menu template="menu/article_menu.html" %}
+	        	{% endblock %}
+
+{% block maincontent %} 
+
+
+    <!--Header-->
+    <header class="background blog-header" style="background-image: url(assets/img/img_bg_main.jpg)">
+    </header>
+    <!--Header-->
+
+    <!--Article-->
+    <div class="container">
+        <div class="article">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="article__back-link" href="{{blog_page.url}}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Back</a>
+                    
+                    <!-- Search form -->
+                    <form role="search" method="get" class="form-search" action="{% routablepageurl blog_page "post_search" %}" method="get">
+					<div class="col-md-4 active-purple-4 mb-4" style="float: right">
+					  <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
+					</div>
+					</form>
+                    
+                    <p class="article__title">{{ post.title }}</p>
+                    <p class="article_date"><i class="far fa-clock"></i> Date: {{post.date |date:"M d, Y"}}, &nbsp; Author : {{post.owner}} &nbsp;, Category : {% post_categories %}</p>
+              
+                    <figure>
+                        {% if post.header_image %}
+        				{% image post.header_image original as header_image %}
+        				<img src="{{ header_image.url }}" class="img-fluid rounded" ></img>
+        				{% endif %}
+                        <figcaption>This is how I organize my HTML, CSS and PHP files</figcaption>
+                    </figure>
+                    <p> {{ post.body|safe }} </p>
+                    <p class="article__share">Share this post:
+                        <a><i class="fa fa-linkedin-square"></i></a>
+                        <a><i class="fa fa-facebook-square"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Article-->
+
+    <!--Other Posts-->
+    <section id="posts" class="container section">
+        <div class="row">
+            <div class="col-md-12">
+                <h2  id="other_posts" class="section__title">{%if posts %} Other Posts_  {% endif %}</h2>
+            </div>
+        </div>
+
+        <div class="row posts">
+            
+            {% for post in posts %}
+            <div class="col-md-4 mr-auto">
+                <div class="posts__item">
+                 	{% if post.header_image %}
+            		{% image post.header_image original as header_image %}
+			            <a href="{% post_date_url post blog_page %}">
+			              <img src="{{ header_image.url }}" class="card-img-top" ></img>
+			            </a>
+        			{% endif %}
+                    <a href="{% post_date_url post blog_page %}">
+                        <h3 class="posts__title" style="margin-top: 10px;">{{ post.title }}</h3>
+                        <p class="posts__description">
+                        {% if post.excerpt %}
+			                {{ post.excerpt|safe|truncatewords_html:20 }}
+			            {% else %}
+			                {{ post.body|safe|truncatewords_html:20 }}
+			            {% endif %}
+                        </p>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </section>
+    <!--Other Posts-->
+
+	<section>
+	<div class="col-md-12">
+	{% categories_list %}
+	<br>
+    {% tags_list %}
+	<br>
+	</div>
+	</section>
+	
+	
+	<!--Contact-->
+	<!-- For Comments Customization check WagtailPortfolio\portfolio\templates\portfolio\comments\disqus.html -->
+    <div class="background" style="background-image: url(assets/img/img_bg_main.jpg)">
+        <div id="contact" class="container section">
+            <div class="row">
+                <div class="col-md-12">
+                    <p id="contacts_header" class="section__title">Make us better_</p>
+                </div>
+            </div>
+            <div class="row contacts">
+                
+                <div class="col-md-12 col-lg-12">
+                    <div class="contacts__form">
+                        {% show_comments %}
+                    </div>
+                    <div class="footer" style="top: 10px">
+                        <p> {%now "Y"%} {{copy_right}}</p>
+                    </div>
+                    <div class="contacts__social" style="text-align: center;">
+                            <span><a href="{{facebook_url}}">Facebook</a></span>
+                            <span><a href="{{linkedin_url}}">Linkedin</a></span>
+                            <span><a href="{{git_url}}">GitHub</a></span>
+                            <span><a href="{{bitbucket_url}}">Bitbucket</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Contact-->
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [['$','$']],
+          displayMath: [['$$','$$']] ,
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+    </script>
+
+    <script type="text/javascript"
+       src="//cdn.mathjax.org/mathjax/latest/MathJax.js">
+    </script>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

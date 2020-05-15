@@ -1,0 +1,68 @@
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd%}
+<!--Portfolio-->
+  <section id="portfolio" class="container section">
+  
+    <div class="row">
+      <div class="col-md-12">
+        <h2 id="portfolio_header" class="section__title">{{parent_projects.title}}</h2>
+      </div>
+    </div>
+    
+    <div class="row portfolio-menu">
+      <div class="col-md-12">
+        <nav>
+          <ul>
+            <li><a href="#" data-portfolio-target-tag="all">all</a></li>
+          	{%for project_set in projects%}
+    		{% for project in project_set.project %}			
+            <li><a href="#" data-portfolio-target-tag="{{project.value.menu_title}}">{{project.value.menu_title}}</a></li>
+          	{% endfor %}
+          	{% endfor %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    
+    <div class="portfolio-cards">
+    {%for project_set in projects%}
+    {% with project_url=project_set.url %}
+    {% for project in project_set.project %}
+      <div class="row project-card" data-toggle="modal" data-target="#portfolioModal" data-portfolio-tag="{{project.value.menu_title}}">
+        <div class="col-md-6 col-lg-5 project-card__img">
+          		 {% if project.value.project_image %}
+			        {% image project.value.project_image fill-462x393 as profile_image %}
+			        <img src="{{ profile_image.url }}" class="" alt="avatar"></img>
+			     {%endif%} 
+        </div>
+        <div class="col-md-6 col-lg-7 project-card__info">
+        <a href="{{project_url}}">
+          <h3 class="project-card__title">{{project.value.name}}</h3>
+          <p class="project-card__description">
+          	{% if project.value.excerpt %}
+                {{ project.value.excerpt|safe|truncatewords_html:40 }}
+            {% else %}
+                {{project.value.description |safe|truncatewords_html:40}}
+            {% endif %}
+            
+          </p>
+          </a>
+          <p class="project-card__stack">Used stack:</p>
+          <ul class="tags">
+          {% for skill in project.value.language %}
+          	<li>{{skill}}</li>
+          {%endfor%}
+          </ul>
+          <a href="{{project.value.project_url}}" class="project-card__link">{{project.value.project_url}}</a>
+        </div>
+      </div>
+      {% endfor %}
+    	{% endwith %}  
+      {% endfor %}  
+    </div>
+    
+    <div style="text-align: center; width: 100%;" >
+    <a href="{{parent_projects.url}}" class="section_btn site-btn" >View Projects</a>
+  	</div>
+  </section>
+<!--Portfolio-->

@@ -1,0 +1,91 @@
+{% extends "portfolio/base/base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd menu_tags%}
+
+{% block title %}{{ self.title }} | {{ parent_project_git.title }}{% endblock title %}
+{% block meta_title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock meta_title %}
+{% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% else %}{{ self.body|striptags|truncatewords:20 }}{% endif %}{% endblock meta_description %}
+
+				{% block mainmenu %}
+	            	{% main_menu template="menu/article_menu.html" %}
+	            {% endblock %}
+
+				{% block mobilemenu %}
+	        		{% main_menu template="menu/article_menu.html" %}
+	        	{% endblock %}
+
+{% block maincontent %}
+
+
+    <!--Header-->
+    <header class="background blog-header" style="background-image: url(assets/img/img_bg_main.jpg)">
+    </header>
+    <!--Header-->
+	
+	{% for git in git.GIT%}
+    <!--Article-->
+    <div class="container">
+        <div class="article">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="article__back-link" href="{{parent_project_git.url}}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Back</a>
+                    <p class="article__title">{{ git.value.name }}</p>
+                    <p class="article_date"><i class="far fa-clock"></i> Date: {{git.value.start_date}} - {{project.value.end_date}}
+              		<figure>
+                        {% if git.value.git_image %}
+        				{% image git.value.git_image original as git_image %}
+        				<img src="{{ git_image.url }}" class="img-fluid rounded" ></img>
+        				{% endif %}
+                        <figcaption>{{git.value.image_text}}</figcaption>
+                    </figure>
+                    <p> {{ git.value.description|safe }} </p>
+					<a href="{{git.value.git_url}}">URL : {{git.value.git_url}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Article-->
+	{%endfor%}
+
+    <!--Other Posts-->
+    <section id="projects" class="container section">
+        <div class="row">
+            <div class="col-md-12">
+                <h2  id="other_projects" class="section__title">{%if gits %}Other Git Project's_ {%endif%}</h2>
+            </div>
+        </div>
+
+        <div class="row projects">
+            
+            {% for git_set in gits %}
+            
+            {%for git in git_set.GIT%}
+            <div class="col-md-4 ">
+                <div class="projects__item">
+                 	{% if git.value.git_image %}
+            		{% image git.value.git_image original as git_image %}
+			            <a href="{{git_set.url}}">
+			              <img src="{{ git_image.url }}" class="card-img-top"  ></img>
+			            </a>
+        			{% endif %}
+                    <a href="{{git_set.url}}">
+                        <h5 class="projects__title" style="margin-top: 10px;">{{ git.value.name }}</h5>
+                        <p class="projects__description" style="font-size: small;">
+                       
+			                {% if git.value.excerpt %}
+				                {{ git.value.excerpt|safe|truncatewords_html:10 }}
+				            {% else %}
+				                {{git.value.description |safe|truncatewords_html:10}}
+				            {% endif %}
+			            
+                        </p>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            
+        </div>
+    </section>
+    <!--Other Posts-->
+
+{% endblock %}

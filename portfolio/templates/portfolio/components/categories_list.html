@@ -1,0 +1,25 @@
+{% load i18n wagtailroutablepage_tags %}
+
+<div class="row posts">
+            <div class="container">
+			  <h5>Category Filter</h5>
+			  <div class="card">
+			  <div class="card-body">
+			  
+					{% for category in categories %}
+			            <span>
+			                <a href="{% routablepageurl blog_page "post_by_category" category.slug %}">
+			                    <span class="badge badge-secondary">{{ category.name }}</span>
+			                </a>
+			            </span>
+			        {% empty %}
+			            {% trans 'No categories yet' %}
+			        {% endfor %}
+
+			  </div>
+			</div>
+			</div>
+            
+        </div>
+        
+        

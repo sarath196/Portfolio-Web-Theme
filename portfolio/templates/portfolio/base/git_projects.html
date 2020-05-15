@@ -1,0 +1,44 @@
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd%}
+<!--Git-->
+  <section id="git" class="container section">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 id="other_posts" class="section__title">Git Projects_</h2>
+      </div>
+    </div>
+    
+    <div class="row post-cards">
+    {% for git_set in gits %}
+	{% for git in git_set.GIT %}
+      <div class="col-md-4">
+        <a href="{{ git_set.value.url }}">  
+          <div class="post-cards__card">
+            <div class="post-cards__img">
+              {% if git.value.git_image %}
+	      		{% image git.value.git_image original as git_image %}
+			           <img src="{{ git_image.url }}"  ></img>
+			         
+	  			{% endif %}
+            </div>
+            <div class="post-cards__info">
+              <p class="post-cards__date">{{ git.value.date|date:"M d, Y" }}</p>
+              <h3 class="post-cards_title">{{ git.value.name }}</h3>
+              <p class="post-cards_description">
+              {% if git.excerpt %}
+			                {{ git.value.excerpt|safe|truncatewords_html:20 }} 
+			  {% else %}
+			                {{ git.value.description|safe|truncatewords_html:20 }}
+			  {% endif %}
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+	{% endfor %}
+	{% endfor %}
+    </div>
+    <div style="text-align: center; width: 100%;" >
+    <a href="{{parent_gits.url}}" class="section_btn site-btn" >More Git Project's</a>
+  	</div>
+  </section>
+<!--Git-->

@@ -1,0 +1,45 @@
+<!--Testimonials-->
+  <div id="testimonials" class="section">
+    <div class="background slider-carousel" style="background-image: url(assets/img/img_bg_main.jpg);">
+      <div class="container">
+        <div id="carouselTestimonials" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+          {% for testimonial in portfolio.testimonial %}
+            <li data-target="#carouselTestimonials" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {%endif%}"></li>
+          {%endfor%} 
+          </ol>
+          <div class="carousel-inner" role="listbox">
+          
+          {% for testimonial in portfolio.testimonial %}
+            <div class="carousel-item {% if forloop.first %} active {%endif%}">
+              <div class="row">
+                <div class="col-md-10 col-sm-10 col-10 mr-auto ml-auto">
+                  <p class="slider-carousel__title">{{testimonial.value.title}}</p>
+                  <p class="slider-carousel__caption">{{testimonial.value.sub_title}}</p>
+                  <hr>
+                  <p class="slider-carousel__description">
+                  {{testimonial.value.content}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {%endfor%} 
+            
+            
+          </div>
+          <a class="carousel-control-prev" href="#testimonials" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#testimonials" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+          <div class="slider-carousel__circle">
+            <p><i class="fa fa-quote-right" aria-hidden="true"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Testimonials-->
