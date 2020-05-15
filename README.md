@@ -5,7 +5,7 @@ Portfolio Web Theme build with Django Wagtail CMS, So it comes with full feature
 Python > 3.7
 
 # Setup Command
-## Create virtual environment for project workspace, skipe if you don't needed
+## Create virtual environment for project workspace, skip if you don't needed
 ```
 pip install virtualenv
 virtualenv venv
