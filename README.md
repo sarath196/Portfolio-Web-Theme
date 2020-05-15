@@ -26,3 +26,9 @@ pip install -r requirements.txt
 ```
 python manage.py runserver 0:8080
 ```
+## URL
+Home Page: http://localhost:8080
+Admin Panel: http://localhost:8000/admin
+
+Username: wagtail
+Password: wagtail@123
