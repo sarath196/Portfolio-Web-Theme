@@ -33,7 +33,7 @@ toml==0.10.1
 Unidecode==0.4.21
 urllib3==1.25.9
 virtualenv==20.0.20
-wagtail==2.9.3
+wagtail==2.11.6
 wagtailmenus==3.0.1
 webencodings==0.5.1
 Willow==1.3
