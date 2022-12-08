@@ -1,7 +1,7 @@
 appdirs==1.4.4
 asgiref==3.2.7
 beautifulsoup4==4.8.2
-certifi==2020.4.5.1
+certifi==2022.12.7
 cfgv==3.1.0
 chardet==3.0.4
 distlib==0.3.0
